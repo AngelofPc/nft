@@ -25,7 +25,6 @@ Verify Contract
 
 ```shell
 npx hardhat verify --network mumbai DEPLOYED_CONTRACT_ADDRESS "name" "symbol" "baseurl(ipfs)"
-npx hardhat verify --mainner rinkeby 0x387366bDcb9bEf64D42B4ceD7aB3BeC51166d108 "FabLabsNFT" "FL" "ipfs://QmWRo55gxXU4LcvGg4XYFrb7zsrr3qoHD1sxSF4EcXYNH8/" --contract contracts/FabsNft.sol:FabsNft
 
-npx hardhat verify --network rinkeby 0x387366bDcb9bEf64D42B4ceD7aB3BeC51166d108 "FabLabsNFT" "FL" "ipfs://QmWRo55gxXU4LcvGg4XYFrb7zsrr3qoHD1sxSF4EcXYNH8/" --contract contracts/FabsNft.sol:FabsNft
+npx hardhat verify --network mainnet 0x387366bDcb9bEf64D42B4ceD7aB3BeC51166d108 "FabLabs" "FL" "ipfs://QmWRo55gxXU4LcvGg4XYFrb7zsrr3qoHD1sxSF4EcXYNH8/" --contract contracts/FabLabs.sol:FabLabs
 ````
