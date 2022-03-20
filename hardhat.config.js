@@ -14,13 +14,17 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-   
+
     mainnet: {
       url: '',
       accounts: [privateKey],
     },
     rinkeby: {
       url: '',
+      accounts: [privateKey],
+    },
+    cronos_testnet: {
+      url: 'https://cronos-testnet-3.crypto.org:8545',
       accounts: [privateKey],
     },
   },

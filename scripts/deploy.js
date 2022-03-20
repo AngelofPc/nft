@@ -14,8 +14,8 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const NFT = await hre.ethers.getContractFactory('FabsNft');
-  const nft = await NFT.deploy('FabsNft', 'FT', 'ipfs://QmWRo55gxXU4LcvGg4XYFrb7zsrr3qoHD1sxSF4EcXYNH8/');
+  const NFT = await hre.ethers.getContractFactory('CronosNftTest');
+  const nft = await NFT.deploy('CronosNftTest', 'CT', 'ipfs://QmYzJELGX1FkfDfmpe58TiUPBrDcukGnH6MVr2a96CVmKP/');
   await nft.deployed();
 
   console.log('NFT deployed to:', nft.address);
