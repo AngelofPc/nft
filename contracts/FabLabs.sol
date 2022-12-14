@@ -5,13 +5,13 @@ pragma solidity >=0.7.0 <0.9.0;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract FabLabs is ERC721Enumerable, Ownable {
+contract NftContract is ERC721Enumerable, Ownable {
     using Strings for uint256;
 
     string public baseURI;
     string public baseExtension = ".json";
     uint256 public cost = 0.032322 ether;
-    uint256 public maxSupply = 10000;
+    uint256 public maxSupply = 4444;
     uint256 public maxMintAmount = 5;
     bool public paused = false;
     uint256 public nftPerAddressLimit = 5;
@@ -62,10 +62,9 @@ contract FabLabs is ERC721Enumerable, Ownable {
         return tokenIds;
     }
 
-      function setCost(uint256 _newCost) public onlyOwner {
-    cost = _newCost;
-  }
-
+    function setCost(uint256 _newCost) public onlyOwner {
+        cost = _newCost;
+    }
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
@@ -93,7 +92,7 @@ contract FabLabs is ERC721Enumerable, Ownable {
         paused = _state;
     }
 
-    function withdraw() public payable onlyOwner {        
+    function withdraw() public payable onlyOwner {
         (bool os, ) = payable(owner()).call{value: address(this).balance}("");
         require(os);
     }

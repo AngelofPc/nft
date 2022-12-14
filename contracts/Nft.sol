@@ -5,17 +5,17 @@ pragma solidity >=0.7.0 <0.9.0;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract CronosNftTest is ERC721Enumerable, Ownable {
+contract NftName is ERC721Enumerable, Ownable {
     using Strings for uint256;
 
     string public baseURI;
     string public notRevealedUri;
     string public baseExtension = ".json";
-    uint256 public cost = 0.032322 ether;
-    uint256 public maxSupply = 10000;
-    uint256 public maxMintAmount = 1;
+    uint256 public cost = 0 ether;
+    uint256 public maxSupply = 44444;
+    uint256 public maxMintAmount = 5;
     bool public paused = false;
-    uint256 public nftPerAddressLimit = 1;
+    uint256 public nftPerAddressLimit = 5;
 
     mapping(address => uint256) public addressMintedBalance;
 
@@ -41,6 +41,11 @@ contract CronosNftTest is ERC721Enumerable, Ownable {
         if (msg.sender != owner()) {
             require(_mintAmount <= maxMintAmount, "max mint amount per session exceeded");
             require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
+
+            if (supply > 500) {
+                cost = 0.008 ether;
+            }
+
             require(msg.value >= cost * _mintAmount, "insufficient funds");
         }
 
@@ -77,6 +82,10 @@ contract CronosNftTest is ERC721Enumerable, Ownable {
         baseURI = _newBaseURI;
     }
 
+    function setCost(uint256 _cost) public onlyOwner {
+        cost = _cost;
+    }
+
     function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
         baseExtension = _newBaseExtension;
     }
@@ -89,7 +98,7 @@ contract CronosNftTest is ERC721Enumerable, Ownable {
         paused = _state;
     }
 
-    function withdraw() public payable onlyOwner {        
+    function withdraw() public payable onlyOwner {
         (bool os, ) = payable(owner()).call{value: address(this).balance}("");
         require(os);
     }

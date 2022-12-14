@@ -14,11 +14,25 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const NFT = await hre.ethers.getContractFactory('FabLabs');
-  const nft = await NFT.deploy('FabLabs', 'FL', 'ipfs://QmWRo55gxXU4LcvGg4XYFrb7zsrr3qoHD1sxSF4EcXYNH8/');
+  const NFT_NAME = 'nftname'
+  const NFT_SYMBOL = 'NS'
+  const NFT_URI = 'ipfs://baseuri/'
+  const NFT = await hre.ethers.getContractFactory('ContractName');
+  const nft = await NFT.deploy(NFT_NAME, NFT_SYMBOL, NFT_URI);
+  await nft.deployTransaction.wait(2);
   await nft.deployed();
 
   console.log('NFT deployed to:', nft.address);
+
+
+// Verfiication
+// npx hardhat verify --network mumbai DEPLOYED_CONTRACT_ADDRESS "name" "symbol" "baseurl(ipfs)"
+
+  await run('verify:verify', {
+    address: nft.address,
+    constructorArguments: [NFT_NAME, NFT_SYMBOL, NFT_URI],
+  });
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
